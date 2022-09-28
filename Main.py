@@ -1,31 +1,49 @@
 class Node:
+
   def __init__(self, data):
     self.data = data
     self.next = None
 
+
 class Stack:
   def __init__(self):
-    self.head = None
+
+    self.top = None
 
   def push(self, data) -> None:
-    nn = Node(data)
-    nn.next = self.head
-    self.head = nn
 
+      if self.top is None:
+        new_node = Node(data)
+        self.top = new_node
+      else:
+        new_node = Node(data)
+        new_node.next = self.top
+        self.top = new_node
   def pop(self) -> None:
-    if(self.head!=None):
-      temp = self.head
-      self.head = temp.next
+
+      if self.top != None:
+        if self.top.next == None:
+          self.top = None
+        else:
+          self.top = self.top.next
+
+
   def status(self):
-    if(self.head  != None):
-      temp = self.head
-      while temp.next!= None:
-        print(temp.data, end = "")
-        print("=>", end = "")
+    """
+    It prints all the elements of stack.
+    """
+    temp = self.top
+    if temp == None:
+      print(temp)
+    if temp is not None:
+      while temp.next != None:
+        print(temp.data,end="=>")
         temp = temp.next
-      print(temp.data, end = "=>")
-      
-    print("None")
+      if temp.next == None:
+        print(temp.data,end="=>")
+        print(None)
+
+
 
 # Do not change the following code
 stack = Stack()
@@ -39,4 +57,4 @@ for i in range(len(operations)):
     stack.push(int(data[i]))
   elif operations[i] == "pop":
     stack.pop()
-stack.status()
+stack.status(
